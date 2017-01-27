@@ -1,0 +1,104 @@
+<div class="banking">
+<h1>Welcome to Banking Application</h1>
+    <advanced-tab>
+      <content>
+        <tabset>
+          <tab heading="User Accounts">
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="user in userdata">
+                  <td>
+                  {{user.username}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+          <tab heading="Get Balance">
+              <form>
+                <div class="form-group">
+                  <select ng-options="userdata.username as userdata.username for userdata in userdata " ng-model="username" class="form-control">
+                    <option value="">Select Username</option>
+                  </select>
+                </div>
+                <button ng-click="getAmount(username)" class="btn btn-primary pull-right">Get Amount</button>
+              </form>
+              <p ng-show="amtFlag"> Your current available balance is: Rs.{{details.amount}}</p>
+          </tab>
+          <tab heading="Deposit">
+            <form>
+              <div class="form-group">
+                
+                <select ng-options="userdata.id as userdata.username for userdata in userdata " ng-model="usercredit" class="form-control">
+                  <option value="">Select Username</option>
+                </select>
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control number" placeholder="Please enter amount" min="1" ng-model="deposit" name="deposit">
+                </div>
+                <button ng-click="creditAmt(usercredit,deposit)" class="btn btn-primary pull-right">Deposit</button>
+            </form>
+          </tab>
+          <tab heading="Withdraw">
+            <form>
+              <div class="form-group">
+                
+                <select ng-options="userdata.id as userdata.username for userdata in userdata " ng-model="userdebit" class="form-control">
+                  <option value="">Select Username</option>
+                </select>
+                </div>
+              <div class="form-group">
+                <input placeholder="Please enter amount" type="number" min="1" ng-model="withdraw" class="form-control number" name="">
+              </div>
+                <button ng-click="debitAmt(userdebit,withdraw)" class="btn btn-primary pull-right">Withdraw</button>
+            </form>
+          </tab>
+          <tab heading="Transfer">
+            <form>
+              <div class="form-group">
+                
+                <select ng-options="userdata.id as userdata.username for userdata in userdata " ng-model="creditor" class="form-control">
+                  <option value="">Select Your Account</option>
+                </select>
+                </div>
+              <div class="form-group">
+                <select ng-options="userdata.id as userdata.username for userdata in userdata " ng-model="debitor" class="form-control">
+                  <option value="">Select Account to transfer</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <input type="number" placeholder="Please enter amount" min="1" ng-model="trnsamt" class="form-control number" name="">
+                </div>
+                <button ng-click="amttransfer(creditor,debitor,trnsamt)" class="btn btn-primary pull-right">Transfer</button>
+            </form>
+          </tab>
+          <tab heading="Get Statements">
+            <form>
+              <div class="form-group">
+                <select ng-options="userdata.id as userdata.username for userdata in userdata " ng-model="usertransactions" class="form-control">
+                  <option value="">Select Username</option>
+                </select>
+              </div>
+                <button ng-click="transaction(usertransactions,amount)" class="btn btn-primary pull-right">Get Statements</button>
+            </form>
+            <table ng-show="transactionFlag" class="table">
+              <thead>
+                <tr>
+                  <td class="isbn-col">Date</th>
+                  <td class="isbn-col">Debit</th>
+                  <td class="isbn-col">Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="stmt in usertransaction">
+                <td>{{stmt.updated_at}}</td>
+                <td>{{stmt.debits}}</td>
+                <td>{{stmt.credits}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+        </tabset>
+      </content>
+    </advanced-tab>
+</div>
